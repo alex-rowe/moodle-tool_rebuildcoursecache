@@ -25,6 +25,10 @@
 
 $string['pluginname'] = 'Rebuild Course Cache';
 $string['pageheader'] = 'Rebuild Course Cache';
-$string['disclaimer'] = 'This tool will Rebuild the Course Cache (modinfo and sectioncache) for all courses on your site.<br />This can take a long time on large sites so you may want to do this during the night or downtime.<br />Are you sure you want to continue?';
+$string['disclaimer'] = 'This tool will Rebuild the Course Cache (modinfo and sectioncache) for all courses on your site.<br />This can take a long time on large sites so you may want to do this during the night or downtime.';
+$string['areyousure'] = 'Are you sure you want to continue?';
 $string['notifyrebuilding'] = 'Starting to Rebuild the Course Cache';
 $string['notifyfinished'] = 'Course cache has been rebuilt';
+$string['specifyids'] = 'Leave this text box empty to rebuild all courses or specify which individual course ids will be rebuilt (Comma or Space separated)<br />Example: 1,2,30,100 or 1 2 30 100';
+$string['success'] = 'SUCCESS - Course ID: {$a} <br />';
+$string['fail'] = 'FAIL - Could not find Course ID: {$a} <br />';

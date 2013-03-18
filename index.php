@@ -32,6 +32,7 @@ require_once($CFG->libdir.'/adminlib.php');
 admin_externalpage_setup('toolrebuildcoursecache');
 
 $sure = optional_param('sure', 0, PARAM_BOOL);
+$specifyids = optional_param('specifyids', '', PARAM_NOTAGS);
 
 ###################################################################
 echo $OUTPUT->header();
@@ -43,7 +44,9 @@ if (!data_submitted() or !confirm_sesskey() or !$sure) {   /// Print a form
     echo '<div class="mdl-align">';
     echo '<form action="index.php" method="post"><div>';
     echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
-    echo '<div><label for="sure">'.get_string('disclaimer', 'tool_rebuildcoursecache').' </label><input type="checkbox" id="sure" name="sure" value="1" /></div>';
+    echo '<div>'.get_string('disclaimer', 'tool_rebuildcoursecache').'<br /><br />';
+    echo '<div><label for="specifyids">'.get_string('specifyids', 'tool_rebuildcoursecache').'</label><br /><input type="text" id="specifyids" name="specifyids" value="" size="30" /></div><br />';    
+    echo '<label for="sure">'.get_string('areyousure', 'tool_rebuildcoursecache').' </label><input type="checkbox" id="sure" name="sure" value="1" /></div>';
     echo '<div class="buttons"><input type="submit" class="singlebutton" value="Rebuild" /></div>';
     echo '</div></form>';
     echo '</div>';
@@ -54,10 +57,24 @@ if (!data_submitted() or !confirm_sesskey() or !$sure) {   /// Print a form
 
 /// Rebuild course cache
 echo $OUTPUT->notification(get_string('notifyrebuilding', 'tool_rebuildcoursecache'), 'notifysuccess');
-rebuild_course_cache();
+if (empty($specifyids)) {
+    rebuild_course_cache();
+} else {
+    echo $OUTPUT->box_start();
+    $courseids = preg_split("/[\s,]+/", $specifyids);
+    foreach ($courseids as $courseid) {
+        if ($DB->record_exists('course', array('id'=>$courseid))) {
+            rebuild_course_cache($courseid);
+            echo get_string('success', 'tool_rebuildcoursecache', $courseid);
+        } else {
+            echo get_string('fail', 'tool_rebuildcoursecache', $courseid);
+        }
+    }
+    echo $OUTPUT->box_end();
+}
 echo $OUTPUT->notification(get_string('notifyfinished', 'tool_rebuildcoursecache'), 'notifysuccess');
 
-echo $OUTPUT->continue_button(new moodle_url('/admin/index.php'));
+echo $OUTPUT->continue_button(new moodle_url('/admin/tool/rebuildcoursecache/index.php'));
 
 echo $OUTPUT->footer();
 
