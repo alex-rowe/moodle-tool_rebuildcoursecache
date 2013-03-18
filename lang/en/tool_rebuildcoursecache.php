@@ -25,6 +25,6 @@
 
 $string['pluginname'] = 'Rebuild Course Cache';
 $string['pageheader'] = 'Rebuild Course Cache';
-$string['disclaimer'] = 'This tool with Rebuild the Course Cache (modinfo and sectioncache).<br />Are you sure you want to continue?';
+$string['disclaimer'] = 'This tool will Rebuild the Course Cache (modinfo and sectioncache) for all courses on your site.<br />This can take a long time on large sites so you may want to do this during the night or downtime.<br />Are you sure you want to continue?';
 $string['notifyrebuilding'] = 'Starting to Rebuild the Course Cache';
 $string['notifyfinished'] = 'Course cache has been rebuilt';
