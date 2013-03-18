@@ -4,6 +4,6 @@ moodle-tool_rebuildcoursecache
 Moodle admin tool to rebuild course cache on all courses.
 This can take some time on large sites with many courses.
 
-Current version: 2013031800
+Current version: 2013031801
 
 Install into /admin/tool/
